@@ -1,0 +1,20 @@
+{{/* Sección de Skills en la landing — US5 (Priority: P5).
+     Reusa skill-group.html (misma partial que layouts/skills/list.html)
+     para no duplicar markup. Cada Page de content/skills/ ES una categoría
+     completa (research.md #2), así que se itera .Pages directamente en vez
+     de GroupByParam "category" — FR-010. */}}
+{{ $skillsPage := .Site.GetPage "section" "skills" }}
+<section class="skills landing-section" id="skills">
+  <h2>Tecnologías</h2>
+  {{ $skills := slice }}
+  {{ with $skillsPage }}{{ $skills = .Pages }}{{ end }}
+  {{ if eq (len $skills) 0 }}
+  <p class="placeholder">Todavía no hay habilidades cargadas.</p>
+  {{ else }}
+  <div class="skills-groups">
+    {{ range $skills.ByWeight }}
+    {{ partial "skill-group.html" . }}
+    {{ end }}
+  </div>
+  {{ end }}
+</section>

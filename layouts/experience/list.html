@@ -1,0 +1,18 @@
+{{ define "main" }}
+<h1>{{ .Title }}</h1>
+
+{{ if .Content }}
+<div class="intro">{{ .Content }}</div>
+{{ end }}
+
+{{ $experience := sort .Pages "Weight" "asc" }}
+{{ if eq (len $experience) 0 }}
+<p class="placeholder">Todavía no hay experiencia laboral cargada.</p>
+{{ else }}
+<ul class="experience-list">
+  {{ range $experience }}
+  {{ partial "experience-card.html" . }}
+  {{ end }}
+</ul>
+{{ end }}
+{{ end }}

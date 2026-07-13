@@ -1,0 +1,18 @@
+{{ define "main" }}
+<h1>{{ .Title }}</h1>
+
+{{ if .Content }}
+<div class="intro">{{ .Content }}</div>
+{{ end }}
+
+{{ $projects := sort .Pages "Weight" "asc" }}
+{{ if eq (len $projects) 0 }}
+<p class="placeholder">Próximamente: todavía no hay proyectos publicados.</p>
+{{ else }}
+<ul class="project-list">
+  {{ range $projects }}
+  {{ partial "project-card.html" . }}
+  {{ end }}
+</ul>
+{{ end }}
+{{ end }}

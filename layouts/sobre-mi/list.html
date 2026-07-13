@@ -1,0 +1,13 @@
+{{/* Página "Sobre mí" — logros, habilidades blandas e idiomas (diseno-nuevo-landing.md).
+     Reusa about.html (misma partial que antes se mostraba en la landing)
+     para no duplicar markup. La Formación ya tiene su propia página en /education/.
+     Arriba, la misma foto de perfil del hero (misma clase .hero-photo, mismo
+     tamaño responsive), centrada en vez de al costado del texto. */}}
+{{ define "main" }}
+<div class="sobre-mi-photo-wrap">
+  {{ with .Site.Params.photo }}
+  <img class="hero-photo" src="{{ . | relURL }}" alt="{{ $.Site.Params.name }}">
+  {{ end }}
+</div>
+{{ partial "about.html" . }}
+{{ end }}

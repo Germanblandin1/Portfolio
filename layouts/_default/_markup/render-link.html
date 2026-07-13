@@ -1,0 +1,9 @@
+{{/* Render hook de Hugo: personaliza cómo se renderiza CUALQUIER link
+     escrito en Markdown (ej. "[Sitio web de la empresa](url)" dentro del
+     body de content/experience/*.md). Los links externos (http/https) se
+     abren en pestaña nueva para no perder el portfolio; los internos
+     (anclas, rutas relativas) se comportan como siempre. */}}
+<a href="{{ .Destination | safeURL }}"
+  {{- with .Title }} title="{{ . }}"{{ end }}
+  {{- if strings.HasPrefix .Destination "http" }} target="_blank" rel="noopener noreferrer"{{ end -}}
+>{{ .Text | safeHTML }}</a>

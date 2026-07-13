@@ -1,0 +1,14 @@
+{{/* Hero/perfil — US1 (Priority: P1). Nombre, rol y bio visibles sin scroll,
+     usando los mismos params.name/role/bio ya definidos en hugo.yaml (FR-003).
+     La foto es opcional: si params.photo no está seteado, la sección sigue
+     funcionando sin imagen rota (research.md #5). */}}
+<section class="hero landing-section" id="inicio">
+  {{ with .Site.Params.photo }}
+  <img class="hero-photo" src="{{ . | relURL }}" alt="{{ $.Site.Params.name }}">
+  {{ end }}
+  <div class="hero-text">
+    <h1>{{ .Site.Params.name }}</h1>
+    <p class="role">{{ .Site.Params.role }}</p>
+    <p class="bio">{{ .Site.Params.bio }}</p>
+  </div>
+</section>

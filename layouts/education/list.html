@@ -1,0 +1,18 @@
+{{ define "main" }}
+<h1>{{ .Title }}</h1>
+
+{{ if .Content }}
+<div class="intro">{{ .Content }}</div>
+{{ end }}
+
+{{ $education := sort .Pages "Params.sort_date" "desc" }}
+{{ if eq (len $education) 0 }}
+<p class="placeholder">Todavía no hay formación académica cargada.</p>
+{{ else }}
+<ul class="education-list">
+  {{ range $education }}
+  {{ partial "education-card.html" . }}
+  {{ end }}
+</ul>
+{{ end }}
+{{ end }}

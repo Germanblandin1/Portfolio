@@ -1,0 +1,20 @@
+{{/* Sección de Contacto en la landing — US5 (Priority: P5).
+     Reusa .Site.Params.contact (mismo dato que ya se listaba en el home de la
+     feature 001), mostrando solo los canales configurados (FR-008). Cada canal
+     se muestra como ícono clickeable; el label sigue existiendo como nombre
+     accesible (aria-label) para lectores de pantalla, ya que el texto visible
+     se reemplazó por el ícono. */}}
+{{ with .Site.Params.contact }}
+<section class="contact landing-section" id="contacto">
+  <h2>Contacto</h2>
+  <ul class="contact-list">
+    {{ range . }}
+    <li>
+      <a href="{{ .url }}" class="contact-icon" aria-label="{{ .label }}" title="{{ .label }}"{{ if strings.HasPrefix .url "http" }} target="_blank" rel="noopener noreferrer"{{ end }}>
+        {{ with .icon }}{{ partial "tech-icon.html" (dict "file" .) }}{{ end }}
+      </a>
+    </li>
+    {{ end }}
+  </ul>
+</section>
+{{ end }}

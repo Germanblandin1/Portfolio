@@ -1,0 +1,76 @@
+# Configuración base del sitio. baseURL solo se usa para preview local
+# (`hugo server`) — en producción, .github/workflows/hugo.yaml la pisa
+# automáticamente con la URL real de GitHub Pages vía actions/configure-pages.
+baseURL: "https://tu-usuario.github.io/"
+locale: "es"
+title: "Portfolio"
+
+pagination:
+  pagerSize: 10
+
+# No usamos taxonomías nativas de Hugo — las skills se agrupan por el campo
+# de front matter `category` (ver research.md #4).
+disableKinds:
+  - taxonomy
+  - term
+
+# Perfil (US1, FR-001, FR-010) — data-model.md § Perfil.
+params:
+  name: "German Blandin"
+  role: "Ingeniero de Software"
+  bio: >
+    Ingeniero de Software con base sólida en algoritmos y estructuras de datos, y más de 7 años
+    de experiencia profesional, principalmente en Go, desarrollando sistemas backend y de
+    escritorio.
+  photo: "/images/foto.png"
+  contact:
+    - label: "Email"
+      url: "mailto:germanblandin18@gmail.com"
+      icon: "gmail.svg"
+    - label: "GitHub"
+      url: "https://github.com/Germanblandin1"
+      icon: "github.svg"
+    - label: "LinkedIn"
+      url: "https://www.linkedin.com/in/german-blandin-3b9367bb/"
+      icon: "linkedin.svg"
+  achievements:
+    - "Participación en torneos ICPC de programación competitiva."
+    - "Primer lugar en competencias de programación competitiva de la Universidad Central de Venezuela (varios años, fechas exactas no registradas)."
+    - "Segundo lugar en competencias nacionales de programación competitiva en Venezuela (en más de una ocasión)."
+  softSkills:
+    - "Trabajo en equipo, colaborando activamente y ayudando a otros miembros cuando puede aportar valor."
+    - "Proactividad para involucrarse en tareas de otros compañeros más allá del propio alcance."
+    - "Resolución recurrente de problemas de optimización en distintos trabajos, logrando reducir tiempos de ejecución de minutos a segundos."
+    - "Liderazgo de un equipo pequeño (2 desarrolladores) durante un proyecto de 3 meses: diseño de la solución de una nueva feature, organización del equipo y división de tareas según las capacidades de cada integrante, logrando el objetivo planteado."
+    - "Fomento de la toma de decisiones colaborativa, incorporando la opinión del equipo en las decisiones relevantes en vez de imponer un único criterio."
+    - "Asignación de tareas según las fortalezas e intereses de cada integrante, brindando apoyo constante cuando lo necesitaban."
+  featuredSkills:
+    - name: "Go"
+      icon: "go.svg"
+    - name: "C++"
+      icon: "cpp.svg"
+    - name: "Python"
+      icon: "python.svg"
+    - name: "PostgreSQL"
+      icon: "postgresql.svg"
+    - name: "Prometheus"
+      icon: "prometheus.svg"
+    - name: "Grafana"
+      icon: "grafana.svg"
+    - name: "OpenTelemetry"
+      icon: "opentelemetry.svg"
+    - name: "Claude Code"
+      icon: "claude-code.svg"
+    - name: "GitHub Copilot"
+      icon: "github-copilot.svg"
+    - name: "Codex"
+      icon: "codex.svg"
+    - name: "Cursor"
+      icon: "cursor.svg"                                                                                       
+    - name: "GitHub Spec Kit"
+      icon: "github.svg"
+    - name: "Model Context Protocol"
+      icon: "mcp.svg"
+  languages:
+    - "Español (nativo)"
+    - "Inglés (A2 — buena comprensión de lectura y trabajo con código/documentación técnica; punto débil en comunicación oral en tiempo real; escritura defendible pero lenta)"

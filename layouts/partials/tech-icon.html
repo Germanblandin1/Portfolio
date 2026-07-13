@@ -1,0 +1,27 @@
+{{/* Ícono de tecnología desde static/images/tech/. Algunos logos son de un
+     solo color y desaparecen contra uno de los dos fondos (ej. el octocat de
+     GitHub es casi negro, el de MCP es blanco puro). Para esos casos existen
+     variantes "<nombre>-light.svg" (para fondo claro) y "<nombre>-dark.svg"
+     (para fondo oscuro); si ambas existen se renderizan las dos y el CSS
+     (.icon-for-light/.icon-for-dark en style.css) muestra la que corresponde
+     al tema activo, con el mismo mecanismo que las variables de color
+     (data-theme del visitante > prefers-color-scheme del sistema). Si no
+     existen variantes, el ícono ya es a color y se usa tal cual.
+     Parámetros: file (nombre en static/images/tech/, con extensión),
+     alt (opcional), title (opcional), draggable (opcional). */}}
+{{ $file := .file }}
+{{ $alt := .alt | default "" }}
+{{ $title := .title }}
+{{ $draggable := .draggable }}
+{{ $ext := path.Ext $file }}
+{{ $base := strings.TrimSuffix $ext $file }}
+{{ $lightFile := printf "%s-light%s" $base $ext }}
+{{ $darkFile := printf "%s-dark%s" $base $ext }}
+{{ $names := slice }}
+{{ range readDir "static/images/tech" }}{{ $names = $names | append .Name }}{{ end }}
+{{ if and (in $names $lightFile) (in $names $darkFile) }}
+<img class="icon-for-light" src="{{ printf "images/tech/%s" $lightFile | relURL }}" alt="{{ $alt }}"{{ with $title }} title="{{ . }}"{{ end }}{{ with $draggable }} draggable="{{ . }}"{{ end }}>
+<img class="icon-for-dark" src="{{ printf "images/tech/%s" $darkFile | relURL }}" alt="{{ $alt }}"{{ with $title }} title="{{ . }}"{{ end }}{{ with $draggable }} draggable="{{ . }}"{{ end }}>
+{{ else }}
+<img src="{{ printf "images/tech/%s" $file | relURL }}" alt="{{ $alt }}"{{ with $title }} title="{{ . }}"{{ end }}{{ with $draggable }} draggable="{{ . }}"{{ end }}>
+{{ end }}

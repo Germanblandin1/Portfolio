@@ -1,0 +1,50 @@
+{{/* Tarjeta de un proyecto. Contexto: una Page de content/projects/.
+     Compartida entre la landing (projects-section.html) y layouts/projects/list.html
+     para no duplicar markup (research.md #1). En vez de linkear a una página de
+     detalle (el sitio no tiene layouts/_default/single.html), el detalle completo
+     y la captura de pantalla (.Params.image) se abren en un <dialog> nativo del
+     navegador (diseno-nuevo-landing.md) — sin JS para el cierre con Escape ni el
+     backdrop, eso lo da gratis el elemento <dialog>. Toda la tarjeta es clickeable
+     (project-modal.js), salvo los links de Repositorio/Demo; el botón "Ver más"
+     se deja además como acceso explícito por teclado/lector de pantalla. */}}
+{{ $modalId := printf "project-modal-%s" .File.ContentBaseName }}
+<li class="project">
+  <h2>{{ .Title }}{{ if .Params.in_progress }} <span class="project-status">En desarrollo</span>{{ end }}</h2>
+  <p>{{ .Params.description }}</p>
+  {{ with .Params.technologies }}
+  <ul class="tag-list">
+    {{ range . }}<li>{{ . }}</li>{{ end }}
+  </ul>
+  {{ end }}
+  {{ if or .Params.repo_url .Params.demo_url .Params.in_progress }}
+  <p class="project-links">
+    {{ if .Params.repo_url }}<a href="{{ .Params.repo_url }}" target="_blank" rel="noopener noreferrer">Repositorio</a>
+    {{- else if .Params.in_progress }}<span class="project-link-pending">Repositorio: Coming soon</span>{{ end }}
+    {{ with .Params.demo_url }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer">Demo</a>{{ end }}
+  </p>
+  {{ end }}
+  <button type="button" class="btn-pill project-more-btn">Ver más</button>
+
+  <dialog id="{{ $modalId }}" class="project-modal">
+    <div class="project-modal-content">
+      <button type="button" class="project-modal-close" data-project-modal-close aria-label="Cerrar">✕</button>
+      <h2>{{ .Title }}{{ if .Params.in_progress }} <span class="project-status">En desarrollo</span>{{ end }}</h2>
+      {{ with .Params.image }}
+      <img class="project-modal-image" src="{{ . | relURL }}" alt="Captura de {{ $.Title }}">
+      {{ end }}
+      {{ with .Content }}<div class="project-modal-body">{{ . }}</div>{{ end }}
+      {{ with .Params.technologies }}
+      <ul class="tag-list">
+        {{ range . }}<li>{{ . }}</li>{{ end }}
+      </ul>
+      {{ end }}
+      {{ if or .Params.repo_url .Params.demo_url .Params.in_progress }}
+      <p class="project-links">
+        {{ if .Params.repo_url }}<a href="{{ .Params.repo_url }}" target="_blank" rel="noopener noreferrer">Repositorio</a>
+        {{- else if .Params.in_progress }}<span class="project-link-pending">Repositorio: Coming soon</span>{{ end }}
+        {{ with .Params.demo_url }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer">Demo</a>{{ end }}
+      </p>
+      {{ end }}
+    </div>
+  </dialog>
+</li>

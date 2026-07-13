@@ -1,0 +1,6 @@
+{{/* Sección "Sobre mí" — narrativa personal como contenido de la propia página
+     (content/sobre-mi/_index.md), no como params de sitio. */}}
+<section class="about landing-section" id="sobre-mi">
+  <h2>Sobre mí</h2>
+  {{ with .Content }}<div class="about-body">{{ . }}</div>{{ end }}
+</section>

@@ -1,0 +1,24 @@
+{{/* Tarjeta de una experiencia laboral. Contexto: una Page de content/experience/.
+     Compartida entre la landing (experience-section.html) y layouts/experience/list.html
+     para no duplicar markup (mismo patrón que project-card.html, research.md #3).
+     Bloques narrativos (title + body): sin fechas/empresa/highlight, cuerpo
+     siempre visible. Meta/highlight/tags quedan como campos opcionales por si
+     alguna entrada futura vuelve a un formato tipo CV. */}}
+<li class="experience">
+  {{ if or .Params.company .Params.date_start .Params.location }}
+  <p class="experience-meta">
+    {{ with .Params.company }}{{ . }} · {{ end }}{{ with .Params.date_start }}{{ . }} — {{ $.Params.date_end }}{{ end }}
+    {{ with .Params.location }} · {{ . }}{{ end }}
+  </p>
+  {{ end }}
+  {{ with .Params.highlight }}<p class="experience-highlight">{{ . }}</p>{{ end }}
+  {{ with .Content }}<div class="experience-body">{{ . }}</div>{{ end }}
+  {{ with .Params.tags }}
+  <details class="experience-details">
+    <summary class="btn-pill">Ver tecnologías</summary>
+    <ul class="tag-list">
+      {{ range . }}<li>{{ . }}</li>{{ end }}
+    </ul>
+  </details>
+  {{ end }}
+</li>

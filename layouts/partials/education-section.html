@@ -1,0 +1,20 @@
+{{/* Sección de Formación académica en la landing — US4 (Priority: P4).
+     Reusa education-card.html (misma partial que layouts/education/list.html)
+     para no duplicar markup. Mismo mecanismo de orden por `Params.sort_date`
+     que experience-section.html (research.md #4), por consistencia si en el
+     futuro se agrega una entrada en curso. */}}
+{{ $educationPage := .Site.GetPage "section" "education" }}
+<section class="education landing-section" id="formacion">
+  <h2>Formación</h2>
+  {{ $education := slice }}
+  {{ with $educationPage }}{{ $education = .Pages }}{{ end }}
+  {{ if eq (len $education) 0 }}
+  <p class="placeholder">Todavía no hay formación académica cargada.</p>
+  {{ else }}
+  <ul class="education-list">
+    {{ range sort $education "Params.sort_date" "desc" }}
+    {{ partial "education-card.html" . }}
+    {{ end }}
+  </ul>
+  {{ end }}
+</section>

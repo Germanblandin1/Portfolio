@@ -1,0 +1,18 @@
+{{/* Grupo de skills de una categoría. Contexto: una Page de content/skills/ — cada
+     página ES una categoría (research.md #2): .Title = nombre de categoría,
+     .Content = habilidades individuales de esa categoría (lista en el body).
+     Usada en layouts/skills/list.html (la landing ya no incluye skills-section.html,
+     diseno-nuevo-landing.md). Los íconos son opcionales (.Params.icons, lista de
+     nombres de archivo en static/images/tech/) — varias categorías son conceptuales
+     y no tienen tecnología con logo, por eso no todas los usan. */}}
+<section class="skill-category">
+  <h2>{{ .Title }}</h2>
+  {{ with .Params.icons }}
+  <ul class="skill-category-icons">
+    {{ range . }}
+    <li>{{ partial "tech-icon.html" (dict "file" .) }}</li>
+    {{ end }}
+  </ul>
+  {{ end }}
+  {{ with .Content }}{{ . }}{{ end }}
+</section>

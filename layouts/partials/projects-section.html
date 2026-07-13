@@ -1,0 +1,18 @@
+{{/* Sección de Proyectos en la landing — US2 (Priority: P2).
+     Reusa project-card.html (misma partial que layouts/projects/list.html)
+     para no duplicar markup (research.md #1, FR-004). */}}
+{{ $projectsPage := .Site.GetPage "section" "projects" }}
+<section class="projects landing-section" id="proyectos">
+  <h2>Proyectos</h2>
+  {{ $projects := slice }}
+  {{ with $projectsPage }}{{ $projects = .Pages }}{{ end }}
+  {{ if eq (len $projects) 0 }}
+  <p class="placeholder">Próximamente: todavía no hay proyectos publicados.</p>
+  {{ else }}
+  <ul class="project-list project-grid">
+    {{ range sort $projects "Weight" "asc" }}
+    {{ partial "project-card.html" . }}
+    {{ end }}
+  </ul>
+  {{ end }}
+</section>

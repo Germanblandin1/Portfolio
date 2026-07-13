@@ -1,0 +1,20 @@
+{{/* Sección de Experiencia laboral en la landing — US3 (Priority: P3).
+     Reusa experience-card.html (misma partial que layouts/experience/list.html)
+     para no duplicar markup. Bloques narrativos por tema, no por fecha: el
+     orden lo fija `weight` (campo nativo de Hugo) en el front matter de cada
+     entrada. */}}
+{{ $experiencePage := .Site.GetPage "section" "experience" }}
+<section class="experience landing-section" id="experiencia">
+  <h2>Trayectoria</h2>
+  {{ $experience := slice }}
+  {{ with $experiencePage }}{{ $experience = .Pages }}{{ end }}
+  {{ if eq (len $experience) 0 }}
+  <p class="placeholder">Todavía no hay experiencia laboral cargada.</p>
+  {{ else }}
+  <ul class="experience-list">
+    {{ range sort $experience "Weight" "asc" }}
+    {{ partial "experience-card.html" . }}
+    {{ end }}
+  </ul>
+  {{ end }}
+</section>

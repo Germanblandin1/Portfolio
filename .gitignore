@@ -1,0 +1,16 @@
+# Hugo build artifacts
+public/
+resources/
+.hugo_build.lock
+
+# Knowledge base (raw personal/source data, not meant to be published)
+base_conocimiento/
+
+# Internal tooling, not part of the published site (deploy branch only)
+.claude/
+.specify/
+specs/
+
+# OS junk
+Thumbs.db
+.DS_Store

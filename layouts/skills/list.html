@@ -1,0 +1,60 @@
+{{ define "main" }}
+<h1>{{ .Title }}</h1>
+
+{{/* Auditoría de íconos (temporal, oculta vía "if false"): verificación visual
+     de que los íconos con variante claro/oscuro se ven bien contra los dos
+     fondos. Se deja el código por si hace falta reactivarla más adelante;
+     borrar del todo cuando se termine de verificar para siempre. */}}
+{{ if false }}
+<section class="icon-audit">
+  <h2>Auditoría de íconos (temporal)</h2>
+  <ul class="icon-audit-list">
+    {{ $files := readDir "static/images/tech" }}
+    {{/* Un ícono por nombre base, no por archivo: si existen "<x>-light.svg"
+         y "<x>-dark.svg" cuentan como uno solo (tech-icon.html decide cuál
+         mostrar segun el tema), en vez de listar los dos archivos sueltos. */}}
+    {{ $bases := slice }}
+    {{ range $files }}
+      {{ $name := .Name }}
+      {{ $base := "" }}
+      {{ if strings.HasSuffix $name "-light.svg" }}
+        {{ $base = strings.TrimSuffix "-light.svg" $name }}
+      {{ else if strings.HasSuffix $name "-dark.svg" }}
+        {{ $base = strings.TrimSuffix "-dark.svg" $name }}
+      {{ else }}
+        {{ $base = strings.TrimSuffix (path.Ext $name) $name }}
+      {{ end }}
+      {{ if and (not (in $bases $base)) (not (in (slice "gmail" "linkedin") $base)) }}
+        {{ $bases = $bases | append $base }}
+      {{ end }}
+    {{ end }}
+    {{ $ordered := slice }}
+    {{ range $bases }}
+      {{ if eq . "sql-server" }}
+        {{ $ordered = $ordered | append . }}
+      {{ end }}
+    {{ end }}
+    {{ range $bases }}
+      {{ if ne . "sql-server" }}
+        {{ $ordered = $ordered | append . }}
+      {{ end }}
+    {{ end }}
+    {{ range $ordered }}
+    <li>
+      {{ partial "tech-icon.html" (dict "file" (printf "%s.svg" .) "alt" .) }}
+      <span>{{ . }}</span>
+    </li>
+    {{ end }}
+  </ul>
+</section>
+{{ end }}
+
+{{ $skills := .Pages }}
+{{ if eq (len $skills) 0 }}
+<p class="placeholder">Todavía no hay habilidades cargadas.</p>
+{{ else }}
+  {{ range $skills.ByWeight }}
+  {{ partial "skill-group.html" . }}
+  {{ end }}
+{{ end }}
+{{ end }}

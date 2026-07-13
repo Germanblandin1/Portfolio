@@ -1,0 +1,16 @@
+{{/* Iconos de tecnologías destacadas (nivel 4-5), debajo del hero.
+     El detalle completo por categoría está en /skills/. */}}
+<section class="featured-skills landing-section">
+  <div class="featured-skills-scroller">
+    <button type="button" class="scroll-btn" data-scroll="left" aria-label="Desplazar a la izquierda">‹</button>
+    <ul class="featured-skills-list" data-skills-track>
+      {{ range .Site.Params.featuredSkills }}
+      <li>
+        {{ partial "tech-icon.html" (dict "file" .icon "alt" .name "title" .name "draggable" "false") }}
+      </li>
+      {{ end }}
+    </ul>
+    <button type="button" class="scroll-btn" data-scroll="right" aria-label="Desplazar a la derecha">›</button>
+  </div>
+  <a class="btn-pill btn-ver-skills" href="{{ "/skills/" | relURL }}">Ver todas las tecnologías →</a>
+</section>

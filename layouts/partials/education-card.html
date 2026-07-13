@@ -1,0 +1,17 @@
+{{/* Tarjeta de una entrada de formación académica. Contexto: una Page de
+     content/education/. Compartida entre la landing (education-section.html) y
+     layouts/education/list.html para no duplicar markup (mismo patrón que
+     experience-card.html). */}}
+<li class="education">
+  <h2>{{ .Title }}</h2>
+  <p class="education-meta">
+    {{ with .Params.institution }}{{ . }} · {{ end }}{{ .Params.date_start }} — {{ .Params.date_end }}
+    {{ with .Params.location }} · {{ . }}{{ end }}
+  </p>
+  {{ with .Params.tags }}
+  <ul class="tag-list">
+    {{ range . }}<li>{{ . }}</li>{{ end }}
+  </ul>
+  {{ end }}
+  {{ with .Content }}<div class="education-body">{{ . }}</div>{{ end }}
+</li>
