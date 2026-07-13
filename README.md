@@ -1,7 +1,6 @@
 # Portfolio
 
 Sitio de portfolio personal generado con [Hugo](https://gohugo.io/), publicado en GitHub Pages.
-Ver `idea.md` y `.specify/memory/constitution.md` para el contexto y las reglas del proyecto.
 
 ## Requisitos
 
@@ -84,5 +83,4 @@ static/        Assets que se copian tal cual (imágenes, etc.).
 archetypes/    Plantillas usadas por `hugo new` para cada tipo de contenido.
 hugo.yaml      Configuración del sitio (título, perfil, params).
 public/        Output generado por `hugo` (no editar, no versionar a mano).
-specs/         Especificaciones del proyecto (spec-driven development, ver CLAUDE.md).
 ```
