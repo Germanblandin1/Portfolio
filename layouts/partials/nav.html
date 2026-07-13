@@ -5,16 +5,17 @@
      (misma página, solo hacen scroll) y los que llevan a una página distinta. */}}
 <nav class="site-nav">
   <div class="site-nav-links">
+    {{ $home := $.Site.Home.RelPermalink }}
     <ul class="site-nav-primary">
-      <li><a href="{{ "/" | relURL }}" {{ if .IsHome }}aria-current="page"{{ end }}>Inicio</a></li>
-      <li><a href="{{ "/#proyectos" | relURL }}">Proyectos</a></li>
-      <li><a href="{{ "/#experiencia" | relURL }}">Trayectoria</a></li>
-      <li><a href="{{ "/#contacto" | relURL }}">Contacto</a></li>
+      <li><a href="{{ $home }}" {{ if .IsHome }}aria-current="page"{{ end }}>Inicio</a></li>
+      <li><a href="{{ $home }}#proyectos">Proyectos</a></li>
+      <li><a href="{{ $home }}#experiencia">Trayectoria</a></li>
+      <li><a href="{{ $home }}#contacto">Contacto</a></li>
     </ul>
     <ul class="site-nav-pages">
-      <li><a href="{{ "/sobre-mi/" | relURL }}">Sobre mí</a></li>
-      <li><a href="{{ "/education/" | relURL }}">Formación</a></li>
-      <li><a href="{{ "/skills/" | relURL }}">Tecnologías</a></li>
+      <li><a href="{{ "sobre-mi/" | relURL }}">Sobre mí</a></li>
+      <li><a href="{{ "education/" | relURL }}">Formación</a></li>
+      <li><a href="{{ "skills/" | relURL }}">Tecnologías</a></li>
     </ul>
   </div>
   {{/* Visible sin JS (progressive enhancement, FR-011); solo se vuelve interactivo
