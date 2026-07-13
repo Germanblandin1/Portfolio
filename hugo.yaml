@@ -22,7 +22,7 @@ params:
     Ingeniero de Software con base sólida en algoritmos y estructuras de datos, y más de 7 años
     de experiencia profesional, principalmente en Go, desarrollando sistemas backend y de
     escritorio.
-  photo: "/images/foto.png"
+  photo: "images/foto.png"
   contact:
     - label: "Email"
       url: "mailto:germanblandin18@gmail.com"
